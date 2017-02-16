@@ -1,4 +1,5 @@
 import "whatwg-fetch";
+import * as hello from "./hello.wast";
 
 declare var WebAssembly: any;
 
@@ -8,6 +9,5 @@ function instantiate(bytes, imports) {
     return WebAssembly.compile(bytes).then(m => new WebAssembly.Instance(m, imports));
 }
 
-fetch('dist/hello.wasm').then(response => response.arrayBuffer())
-    .then(bytes => instantiate(bytes, importObject))
-    .then(instance => instance.exports.e());
+const bytes = Uint8Array.from(hello);
+instantiate(bytes, importObject).then(instance => instance.exports.e());

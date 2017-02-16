@@ -9,11 +9,12 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.ts$/, loader: "awesome-typescript-loader", exclude: /node_modules/}
+            {test: /\.ts$/, loader: "awesome-typescript-loader", exclude: /node_modules/},
+            {test: /\.wast$/, loader: "wast-loader", exclude: /node_modules/}
         ]
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js", ".wast"]
     },
     plugins: [
         new HtmlWebpackPlugin({
