@@ -4,6 +4,6 @@
         "target": "es2015",
         "noImplicitAny": false,
         "sourceMap": false,
-        "lib": ["ES2015", "DOM", "ScriptHost", "node"]
+        "lib": ["ES2015", "DOM", "ScriptHost"]
     }
 }

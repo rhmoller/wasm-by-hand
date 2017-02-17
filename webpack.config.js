@@ -1,8 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const JasmineWebpackPlugin = require("jasmine-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.ts",
+    entry: "./src/specRoot.ts",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
@@ -19,6 +20,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "src/index.html"
-        })
+        }),
+        new JasmineWebpackPlugin()
     ]
 };
