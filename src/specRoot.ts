@@ -31,13 +31,8 @@ describe("square.wast", () => {
 });
 
 describe("counter", () => {
-    let buffer = [];
-    let trace = (num) => buffer.push(num);
-
-    const imports = { imports: { trace } };
-
     it("counts", (done) => {
-        instantiate(counter, imports).then(instance => {
+        instantiate(counter, {}).then(instance => {
             console.log("exports", instance.exports);
             let v = instance.exports.count();
             expect(v).toEqual(0);
