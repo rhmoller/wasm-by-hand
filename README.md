@@ -11,14 +11,20 @@ with the `javascript.options.wasm` and `javascript.options.wasm_baselinejit` fla
     cd wasm-by-hand
     npm install
     npm start
-    
+
 Then open http://localhost:8080 in your browser
 
 # References
 
 There is no spec for the s-expression version of WebAssembly, but these resources have turned out helpful:
 
-* https://github.com/WebAssembly/testsuite
+* https://github.com/WebAssembly/testsuite - useful examples can be found in the test suite
+    * https://github.com/WebAssembly/testsuite/blob/master/func.wast - function syntax
+    * https://github.com/WebAssembly/testsuite/blob/master/i32.wast - functions wrapping i32 operations
+    * https://github.com/WebAssembly/testsuite/blob/master/i64.wast - functions wrapping i64 operations
 * http://webassembly.org/getting-started/js-api/
 * http://cultureofdevelopment.com/blog/build-your-first-thing-with-web-assembly/
-
+* http://blog.golovin.in/how-to-start-using-webassembly-today/
+* https://gist.github.com/yurydelendik/4eeff8248aeb14ce763e - using webassembly with LLVM
+* https://rsms.me/wasm-intro
+* http://blog.mikaellundin.name/2016/06/19/creating-a-webassembly-binary-and-running-it-in-a-browser.html

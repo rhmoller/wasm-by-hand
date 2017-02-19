@@ -1,5 +1,7 @@
 import * as constant from "./constant.wast";
 import * as square from "./square.wast";
+import * as controlflow from "./controlflow.wast";
+import * as counter from "./counter.wast";
 
 declare const WebAssembly: any;
 
@@ -23,6 +25,25 @@ describe("square.wast", () => {
             expect(instance.exports.square(2)).toBe(4);
             expect(instance.exports.square(3)).toBe(9);
             expect(instance.exports.square(4)).toBe(16);
+            done();
+        });
+    });
+});
+
+describe("counter", () => {
+    let buffer = [];
+    let trace = (num) => buffer.push(num);
+
+    const imports = { imports: { trace } };
+
+    it("counts", (done) => {
+        instantiate(counter, imports).then(instance => {
+            console.log("exports", instance.exports);
+            let v = instance.exports.count();
+            expect(v).toEqual(0);
+
+            v = instance.exports.count();
+            expect(v).toEqual(1);
             done();
         });
     });
