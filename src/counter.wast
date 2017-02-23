@@ -17,8 +17,7 @@
 
 (module
   (memory 1 2)
-  (export "count" (func $count))
-  (func $count (result i32)
+  (func (export "count") (result i32)
     (local $0 i32)
     (i32.store offset=12
       (i32.const 0)
