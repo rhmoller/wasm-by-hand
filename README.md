@@ -12,7 +12,7 @@ with the `javascript.options.wasm` and `javascript.options.wasm_baselinejit` fla
     npm install
     npm start
 
-Then open http://localhost:8080 in your browser
+Then open http://localhost:8080/_specRunner.html in your browser
 
 # References
 
