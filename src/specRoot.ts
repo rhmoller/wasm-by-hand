@@ -10,7 +10,7 @@ function instantiate(bytes, imports) {
     return WebAssembly.compile(bytes8).then(m => new WebAssembly.Instance(m, imports));
 }
 
-describe("constant.wast", () => {
+describe("constant", () => {
     it("returns the constant 42", (done) => {
         instantiate(constant, {}).then(instance => {
             expect(instance.exports.answer).toBe(42);
@@ -19,7 +19,7 @@ describe("constant.wast", () => {
     });
 });
 
-describe("square.wast", () => {
+describe("square", () => {
     it("squares the input number", (done) => {
         instantiate(square, {}).then(instance => {
             expect(instance.exports.square(2)).toBe(4);
@@ -33,12 +33,27 @@ describe("square.wast", () => {
 describe("counter", () => {
     it("counts", (done) => {
         instantiate(counter, {}).then(instance => {
-            console.log("exports", instance.exports);
             let v = instance.exports.count();
             expect(v).toEqual(0);
 
             v = instance.exports.count();
             expect(v).toEqual(1);
+            done();
+        });
+    });
+});
+
+describe("controlflow", () => {
+    it("loops", (done) => {
+        let output = [];
+        instantiate(controlflow, {
+            imports: {
+                trace: i => output.push(i)
+            }
+        }).then(instance => {
+            let loop = instance.exports.loop;
+            loop();
+            expect(output).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8 ,9]);
             done();
         });
     });
