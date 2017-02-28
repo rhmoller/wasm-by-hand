@@ -16,8 +16,8 @@ Then open http://localhost:8080/_specRunner.html in your browser
 
 # References
 
-There is no spec for the s-expression version of WebAssembly, but these resources have turned out helpful:
-
+* https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/
+* https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
 * https://github.com/WebAssembly/testsuite - useful examples can be found in the test suite
     * https://github.com/WebAssembly/testsuite/blob/master/func.wast - function syntax
     * https://github.com/WebAssembly/testsuite/blob/master/i32.wast - functions wrapping i32 operations
