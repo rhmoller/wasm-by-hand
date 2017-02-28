@@ -13,7 +13,8 @@ function instantiate(bytes, imports) {
 
 describe("empty", () => {
     it("does not blow up", (done) => {
-        instantiate(empty, {}).then(() => {
+        instantiate(empty, {}).then((instance) => {
+            expect(instance).not.toBeNull();
             done();
         });
     });
