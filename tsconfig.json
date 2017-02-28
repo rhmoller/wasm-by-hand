@@ -3,7 +3,6 @@
         "module": "commonjs",
         "target": "es2015",
         "noImplicitAny": false,
-        "sourceMap": false,
-        "lib": ["ES2015", "DOM", "ScriptHost"]
+        "sourceMap": false
     }
 }
