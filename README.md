@@ -2,8 +2,7 @@
 
 A little experiment with hand writing [WebAssembly](http://webassembly.org/) using s-expression syntax (.wast).
 
-Requires a browser with support for WebAssembly (version 0x01). For example Firefox Developer Edition version 53
-with the `javascript.options.wasm` and `javascript.options.wasm_baselinejit` flags enabled.
+Requires a browser with support for WebAssembly (version 0x01). For example Firefox 52.
 
 # Run It
 
