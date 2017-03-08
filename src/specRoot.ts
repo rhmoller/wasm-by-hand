@@ -6,9 +6,8 @@ import * as counter from "./counter.wast";
 
 declare const WebAssembly: any;
 
-function instantiate(bytes, imports) {
-    const bytes8 = Uint8Array.from(bytes);
-    return WebAssembly.compile(bytes8).then(m => new WebAssembly.Instance(m, imports));
+function instantiate(wastBuffer, imports) {
+    return WebAssembly.instantiate(wastBuffer, imports).then(result => result.instance);
 }
 
 describe("empty", () => {
