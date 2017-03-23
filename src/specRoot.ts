@@ -1,8 +1,8 @@
-import * as empty from "./empty.wast";
-import * as constant from "./constant.wast";
-import * as square from "./square.wast";
-import * as controlflow from "./controlflow.wast";
-import * as counter from "./counter.wast";
+import * as empty from "./empty.wat";
+import * as constant from "./constant.wat";
+import * as square from "./square.wat";
+import * as controlflow from "./controlflow.wat";
+import * as counter from "./counter.wat";
 
 declare const WebAssembly: any;
 
