@@ -14,15 +14,13 @@
     "@types/jasmine": "^2.5.43",
     "@types/webpack-env": "^1.13.0",
     "awesome-typescript-loader": "^3.0.4",
-    "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.28.0",
     "jasmine-webpack-plugin": "^0.1.1",
-    "through2": "^2.0.3",
-    "typescript": "^2.1.6",
+    "typescript": "^2.5.3",
     "wast-loader": "^0.3.0",
     "wast2wasm": "0.0.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
   },
   "dependencies": {}
 }
