@@ -22,7 +22,16 @@ describe("empty", () => {
 describe("constant", () => {
     it("returns the constant 42", (done) => {
         instantiate(constant, {}).then(instance => {
-            expect(instance.exports.answer).toBe(42);
+            // a change was squeezed into the spec after release
+            // so now we have inconsistent behaviour in browsers
+            // old behaviour: represent export as JS number
+            // new behaviour: box number in a WebAssembly.Global
+            const answer = instance.exports.answer;
+            if (typeof answer === "number") {
+              expect(answer).toBe(42);
+            } else {
+              expect(answer.value).toBe(42);
+            }
             done();
         });
     });
