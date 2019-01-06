@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --mode=development"
   },
   "keywords": [],
   "author": "Rene Hangstrup Møller <rhmoller@gmail.com> (http://giddyplanet.com/)",
@@ -14,13 +14,15 @@
     "@types/jasmine": "^2.8.8",
     "@types/webpack-env": "^1.13.6",
     "awesome-typescript-loader": "^3.5.0",
-    "html-webpack-plugin": "^2.28.0",
+    "html-webpack-plugin": "^3.2.0",
     "jasmine-webpack-plugin": "^0.1.1",
+    "lodash": "^4.17.5",
     "typescript": "^2.9.2",
     "wast-loader": "^0.3.0",
     "wast2wasm": "0.0.0",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.2"
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {}
 }
