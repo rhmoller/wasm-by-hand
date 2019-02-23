@@ -1,0 +1,1 @@
+import "webassembly-js-api";
