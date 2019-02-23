@@ -11,6 +11,16 @@ Requires a browser with support for WebAssembly (version 0x01). For example Fire
     npm install
     npm test
 
+And you should see a report like this
+
+     PASS  src/wasm-by-hand.test.ts
+      ✓ compiles empty module (85ms)
+      ✓ squares the input number (56ms)
+      ✓ squares the input name (alternative syntax) (20ms)
+      ✓ counter increments number for each invocation (15ms)
+      ✓ exports the global constant (5ms)
+      ✓ loops from 0 to 9 (18ms)
+
 # References
 
 * https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/ - great introduction to the concepts
