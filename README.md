@@ -9,9 +9,7 @@ Requires a browser with support for WebAssembly (version 0x01). For example Fire
     git clone https://github.com/rhmoller/wasm-by-hand.git
     cd wasm-by-hand
     npm install
-    npm start
-
-Then open http://localhost:8080/_specRunner.html in your browser
+    npm test
 
 # References
 
