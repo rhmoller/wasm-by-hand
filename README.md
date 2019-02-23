@@ -1,8 +1,6 @@
 # WebAssembly by Hand
 
-A little experiment with hand writing [WebAssembly](http://webassembly.org/) using s-expression syntax (.wast).
-
-Requires a browser with support for WebAssembly (version 0x01). For example Firefox 52.
+A little experiment with hand writing [WebAssembly](http://webassembly.org/) using s-expression syntax (.wat).
 
 # Run It
 

@@ -68,8 +68,8 @@ it("loops from 0 to 9", async () => {
 
 async function compileAndInstantiate(watFile: string, imports: any = {}) {
     const pathToWatFile = path.resolve("src", "wat", watFile);
-    const wastBuffer = fs.readFileSync(pathToWatFile, {encoding: "UTF-8"});
-    const parsed = wabt.parseWat(watFile, wastBuffer);
+    const watBuffer = fs.readFileSync(pathToWatFile, {encoding: "UTF-8"});
+    const parsed = wabt.parseWat(watFile, watBuffer);
     parsed.resolveNames();
     parsed.validate();
     const binaryOutput = parsed.toBinary({log: true, write_debug_names: true});

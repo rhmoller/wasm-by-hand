@@ -1,3 +1,5 @@
+// downloads the latest version of libwabt.js from the WABT project
+
 const fs = require("fs");
 const https = require("https");
 const path = require("path");
