@@ -2,6 +2,8 @@
 
 A little experiment with hand writing [WebAssembly](http://webassembly.org/) using s-expression syntax (.wat).
 
+Mozilla has a great introduction to the format here [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
+
 # Run It
 
     git clone https://github.com/rhmoller/wasm-by-hand.git
@@ -21,8 +23,9 @@ And you should see a report like this
 
 # References
 
+* https://webassembly.github.io/spec/core/text/index.html - specification for the WAT format
+* https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format - explains the .wat format
 * https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/ - great introduction to the concepts
-* https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format - explain the .wast format
 * http://webassembly.org/docs/semantics/
 * https://github.com/WebAssembly/testsuite - useful examples can be found in the test suite
     * https://github.com/WebAssembly/testsuite/blob/master/func.wast - function syntax
