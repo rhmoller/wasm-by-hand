@@ -39,10 +39,13 @@ it("counter increments number for each invocation", async () => {
 
 it("exports the global constant", async () => {
     const instance = await compileAndInstantiate("constant.wat");
+
     const answer = instance.exports.answer;
+
     // a change was squeezed into the WebAssembly spec after MVP release
     // old behaviour: represent export as JS number
     // new behaviour: box number in a WebAssembly.Global
+
     if (typeof answer === "number") {
         expect(answer).toEqual(42);
     } else {
