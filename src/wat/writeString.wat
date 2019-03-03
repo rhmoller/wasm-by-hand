@@ -1,5 +1,3 @@
-;; Uses locals for working variables
-
 (module
     (import "js" "memory" (memory 1))
     (import "js" "println" (func $println (param i32 i32)))
