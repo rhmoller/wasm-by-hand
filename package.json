@@ -16,6 +16,7 @@
     "@types/node": "^11.9.4",
     "@types/webassembly-js-api": "0.0.2",
     "jest": "^24.1.0",
+    "prettier": "^1.16.4",
     "ts-jest": "^24.0.0",
     "typescript": "^2.9.2"
   },

@@ -1,16 +1,15 @@
-import {wat} from "./wasm-util";
+import { wat } from "./wasm-util";
 
 describe("wat-tag", () => {
+  it("Compiles an empty module", async done => {
+    const module = await wat`(module)`;
+    const instance = WebAssembly.instantiate(module);
+    expect(instance).not.toBe(null);
+    done();
+  });
 
-    it("Compiles an empty module", async (done) => {
-        const module = await wat`(module)`;
-        const instance = WebAssembly.instantiate(module);
-        expect(instance).not.toBe(null);
-        done();
-    });
-
-    it("Compiles the square function", async (done) => {
-        const module = await wat`
+  it("Compiles the square function", async done => {
+    const module = await wat`
             (module
                 (func (export "square") (param $i i32) (result i32)
                     get_local $i
@@ -19,16 +18,15 @@ describe("wat-tag", () => {
                 )
             )
         `;
-        const instance = await WebAssembly.instantiate(module);
+    const instance = await WebAssembly.instantiate(module);
 
-        expect(instance).not.toBe(null);
-        expect(instance.exports.square(3)).toBe(9);
-        done();
-    });
+    expect(instance).not.toBe(null);
+    expect(instance.exports.square(3)).toBe(9);
+    done();
+  });
 
-
-    it("counts to 5" , async (done) => {
-        const module = await wat`
+  it("counts to 5", async done => {
+    const module = await wat`
             (module
                 ;; import trace function that accepts a single i32 argument
                 (func $trace (import "js" "trace") (param i32))
@@ -52,16 +50,15 @@ describe("wat-tag", () => {
             )
         `;
 
-        const log: Array<number> = [];
-        const instance = await WebAssembly.instantiate(module, {
-            "js": {
-                trace: (i: any) => log.push(i)
-            }
-        });
-
-        instance.exports.countTo(5);
-        expect(log).toEqual([1, 2, 3, 4, 5]);
-        done();
+    const log: Array<number> = [];
+    const instance = await WebAssembly.instantiate(module, {
+      js: {
+        trace: (i: number) => log.push(i)
+      }
     });
 
+    instance.exports.countTo(5);
+    expect(log).toEqual([1, 2, 3, 4, 5]);
+    done();
+  });
 });
