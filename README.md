@@ -2,9 +2,9 @@
 
 A little experiment with hand writing [WebAssembly](http://webassembly.org/) using s-expression syntax (.wat).
 
-Mozilla has a great introduction to the format here [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
+The project is organized as a test suite that demonstrates different aspects of the WebAssembly syntax.
 
-# Run It
+# Run the test suite with annotated examples
 
     git clone https://github.com/rhmoller/wasm-by-hand.git
     cd wasm-by-hand
@@ -13,13 +13,31 @@ Mozilla has a great introduction to the format here [Understanding WebAssembly t
 
 And you should see a report like this
 
-     PASS  src/wasm-by-hand.test.ts
-      ✓ compiles empty module (85ms)
-      ✓ squares the input number (56ms)
-      ✓ squares the input name (alternative syntax) (20ms)
-      ✓ counter increments number for each invocation (15ms)
-      ✓ exports the global constant (5ms)
-      ✓ loops from 0 to 9 (18ms)
+    PASS  src/fizzbuzz.test.ts
+     ✓ Prints fizzbuzz (139ms)
+    
+    PASS  src/control-flow.test.ts
+     control flow
+       ✓ loops from 0 to 9 (4ms)
+       ✓ counts from 0 to 5 (6ms)
+       ✓ demonstrates if-then-else (2ms)
+    
+    PASS  src/wat-tag.test.ts
+     wat-tag
+       ✓ Compiles an empty module (65ms)
+       ✓ Compiles the square function (81ms)
+       ✓ counts to 5 (73ms)
+    
+    PASS  src/wasm-by-hand.test.ts
+     ✓ compiles empty module (10ms)
+     ✓ squares the input number (20ms)
+     ✓ counter increments number for each invocation (21ms)
+     ✓ exports the global constant (7ms)
+     ✓ Writes a string to memory (7ms)
+
+# Learn more about WebAssembly
+
+Mozilla has a great introduction to the format here [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
 
 # References
 
