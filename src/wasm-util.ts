@@ -5,7 +5,7 @@ import Imports = WebAssembly.Imports;
 
 const wabt = require("./libwabt")();
 
-export async function compileAndInstantiate(watFile: string, imports: Imports = {}) {
+export async function compileAndInstantiate<T extends WebAssembly.Instance>(watFile: string, imports: Imports = {}): Promise<T> {
   const pathToWatFile = path.resolve("src", "wat", watFile);
   const watBuffer = fs.readFileSync(pathToWatFile, { encoding: "UTF-8" });
   const parsed = wabt.parseWat(watFile, watBuffer);
@@ -14,7 +14,7 @@ export async function compileAndInstantiate(watFile: string, imports: Imports = 
   const binaryOutput = parsed.toBinary({ log: true, write_debug_names: true });
   const buffer = binaryOutput.buffer;
   const result = await WebAssembly.instantiate(buffer, imports);
-  return result.instance;
+  return result.instance as T;
 }
 
 export function decodeWasmString(memory: WebAssembly.Memory, offset: number, length: number) {

@@ -1,11 +1,19 @@
-import { compileAndInstantiate } from "./wasm-util";
+import {compileAndInstantiate} from "./wasm-util";
+
+interface ControlFlowInstance {
+  exports: {
+    loop: Function;
+    countTo: Function;
+    if_then_else: Function;
+  }
+}
 
 describe("control flow", () => {
   const log: Array<number> = [];
-  let instance: WebAssembly.Instance;
+  let instance: ControlFlowInstance;
 
   beforeAll(async () => {
-    instance = await compileAndInstantiate("controlflow.wat", {
+    instance = await compileAndInstantiate<ControlFlowInstance>("controlflow.wat", {
       imports: {
         trace: (i: any) => log.push(i)
       }
@@ -17,27 +25,24 @@ describe("control flow", () => {
   });
 
   it("loops from 0 to 9", async () => {
-    const loop = instance.exports.loop as Function;
-    loop();
+    instance.exports.loop();
 
     expect(log).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 
   it("counts from 0 to 5", async done => {
-    const countTo = instance.exports.countTo as Function;
-    countTo(5);
+    instance.exports.countTo(5);
     expect(log).toEqual([0, 1, 2, 3, 4]);
     done();
   });
 
   it("demonstrates if-then-else", async done => {
-    const ifThenElse = instance.exports.if_then_else as Function;
-    ifThenElse(0);
+    instance.exports.if_then_else(0);
     expect(log).toEqual([3]);
 
     log.length = 0;
 
-    ifThenElse(1);
+    instance.exports.if_then_else(1);
     expect(log).toEqual([5]);
 
     done();

@@ -1,9 +1,15 @@
 import { compileAndInstantiate, decodeWasmString } from "./wasm-util";
 
+interface FizzBuzzInstance extends WebAssembly.Instance {
+  exports: {
+    fizzbuzz: Function
+  }
+}
+
 it("Prints fizzbuzz", async done => {
   const lines: Array<string> = [];
   const memory = new WebAssembly.Memory({ initial: 1 });
-  const instance = await compileAndInstantiate("fizzbuzz.wat", {
+  const instance = await compileAndInstantiate<FizzBuzzInstance>("fizzbuzz.wat", {
     js: {
       memory,
       println: (offset: number, length: number) => {
@@ -12,9 +18,7 @@ it("Prints fizzbuzz", async done => {
       }
     }
   });
-  const fizzbuzz = instance.exports.fizzbuzz as Function;
-
-  fizzbuzz(16);
+  instance.exports.fizzbuzz(16);
 
   expect(lines[0]).toEqual("1");
   expect(lines[1]).toEqual("2");
