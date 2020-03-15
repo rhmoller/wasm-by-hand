@@ -1,4 +1,5 @@
 import { wat } from "./wasm-util";
+import Module = WebAssembly.Module;
 
 describe("wat-tag", () => {
   it("Compiles an empty module", async done => {
@@ -9,7 +10,7 @@ describe("wat-tag", () => {
   });
 
   it("Compiles the square function", async done => {
-    const module = await wat`
+    const module: Module = await wat`
             (module
                 (func (export "square") (param $i i32) (result i32)
                     get_local $i
@@ -21,7 +22,8 @@ describe("wat-tag", () => {
     const instance = await WebAssembly.instantiate(module);
 
     expect(instance).not.toBe(null);
-    expect(instance.exports.square(3)).toBe(9);
+    const square = instance.exports.square as Function;
+    expect(square(3)).toBe(9);
     done();
   });
 
@@ -57,7 +59,8 @@ describe("wat-tag", () => {
       }
     });
 
-    instance.exports.countTo(5);
+    const countTo = instance.exports.countTo as Function;
+    countTo(5);
     expect(log).toEqual([1, 2, 3, 4, 5]);
     done();
   });

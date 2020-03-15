@@ -12,8 +12,9 @@ it("Prints fizzbuzz", async done => {
       }
     }
   });
+  const fizzbuzz = instance.exports.fizzbuzz as Function;
 
-  instance.exports.fizzbuzz(16);
+  fizzbuzz(16);
 
   expect(lines[0]).toEqual("1");
   expect(lines[1]).toEqual("2");

@@ -17,24 +17,27 @@ describe("control flow", () => {
   });
 
   it("loops from 0 to 9", async () => {
-    instance.exports.loop();
+    const loop = instance.exports.loop as Function;
+    loop();
 
     expect(log).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 
   it("counts from 0 to 5", async done => {
-    instance.exports.countTo(5);
+    const countTo = instance.exports.countTo as Function;
+    countTo(5);
     expect(log).toEqual([0, 1, 2, 3, 4]);
     done();
   });
 
   it("demonstrates if-then-else", async done => {
-    instance.exports.if_then_else(0);
+    const ifThenElse = instance.exports.if_then_else as Function;
+    ifThenElse(0);
     expect(log).toEqual([3]);
 
     log.length = 0;
 
-    instance.exports.if_then_else(1);
+    ifThenElse(1);
     expect(log).toEqual([5]);
 
     done();
