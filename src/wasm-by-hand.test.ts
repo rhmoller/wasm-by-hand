@@ -1,5 +1,30 @@
 import { compileAndInstantiate, decodeWasmString } from "./wasm-util";
 
+interface SquareInstance {
+  exports: {
+    square: (value: number) => number;
+    square_alt_syntax: (value: number) => number;
+  }
+}
+
+interface CounterInstance {
+  exports: {
+    count: () => number;
+  }
+}
+
+interface ConstantInstance {
+  exports: {
+    answer: WebAssembly.Global;
+  }
+}
+
+interface WriteStringInstance {
+  exports: {
+    writeMessage: () => void;
+  }
+}
+
 it("compiles empty module", async () => {
   const instance = await compileAndInstantiate("empty.wat");
 
@@ -7,7 +32,7 @@ it("compiles empty module", async () => {
 });
 
 it("squares the input number", async () => {
-  const instance = await compileAndInstantiate("square.wat");
+  const instance = await compileAndInstantiate<SquareInstance>("square.wat");
 
   expect(instance.exports.square(2)).toEqual(4);
   expect(instance.exports.square(3)).toEqual(9);
@@ -19,7 +44,7 @@ it("squares the input number", async () => {
 });
 
 it("counter increments number for each invocation", async () => {
-  const instance = await compileAndInstantiate("counter.wat");
+  const instance = await compileAndInstantiate<CounterInstance>("counter.wat");
 
   let count = instance.exports.count();
   expect(count).toEqual(0);
@@ -32,7 +57,7 @@ it("counter increments number for each invocation", async () => {
 });
 
 it("exports the global constant", async () => {
-  const instance = await compileAndInstantiate("constant.wat");
+  const instance = await compileAndInstantiate<ConstantInstance>("constant.wat");
 
   const answer = instance.exports.answer;
 
@@ -40,17 +65,13 @@ it("exports the global constant", async () => {
   // old behaviour: represent export as JS number
   // new behaviour: box number in a WebAssembly.Global
 
-  if (typeof answer === "number") {
-    expect(answer).toEqual(42);
-  } else {
-    expect(answer.value).toEqual(42);
-  }
+  expect(answer.value).toEqual(42);
 });
 
 it("Writes a string to memory", async done => {
   const lines: Array<string> = [];
   const memory = new WebAssembly.Memory({ initial: 1 });
-  const instance = await compileAndInstantiate("writeString.wat", {
+  const instance = await compileAndInstantiate<WriteStringInstance>("writeString.wat", {
     js: {
       memory,
       println: (offset: number, length: number) => {
