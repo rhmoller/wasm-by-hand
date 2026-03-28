@@ -4,25 +4,25 @@ interface SquareInstance {
   exports: {
     square: (value: number) => number;
     square_alt_syntax: (value: number) => number;
-  }
+  };
 }
 
 interface CounterInstance {
   exports: {
     count: () => number;
-  }
+  };
 }
 
 interface ConstantInstance {
   exports: {
     answer: WebAssembly.Global;
-  }
+  };
 }
 
 interface WriteStringInstance {
   exports: {
     writeMessage: () => void;
-  }
+  };
 }
 
 it("compiles empty module", async () => {
@@ -68,7 +68,7 @@ it("exports the global constant", async () => {
   expect(answer.value).toEqual(42);
 });
 
-it("Writes a string to memory", async done => {
+it("Writes a string to memory", async () => {
   const lines: Array<string> = [];
   const memory = new WebAssembly.Memory({ initial: 1 });
   const instance = await compileAndInstantiate<WriteStringInstance>("writeString.wat", {
@@ -77,13 +77,11 @@ it("Writes a string to memory", async done => {
       println: (offset: number, length: number) => {
         const string = decodeWasmString(memory, offset, length);
         lines.push(string);
-      }
-    }
+      },
+    },
   });
 
   instance.exports.writeMessage();
   expect(lines.length).toEqual(1);
   expect(lines[0]).toEqual("Hello from WebAssembly");
-
-  done();
 });

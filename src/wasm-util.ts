@@ -5,9 +5,12 @@ import Imports = WebAssembly.Imports;
 
 const wabt = require("./libwabt")();
 
-export async function compileAndInstantiate<T extends WebAssembly.Instance>(watFile: string, imports: Imports = {}): Promise<T> {
+export async function compileAndInstantiate<T extends WebAssembly.Instance>(
+  watFile: string,
+  imports: Imports = {},
+): Promise<T> {
   const pathToWatFile = path.resolve("src", "wat", watFile);
-  const watBuffer = fs.readFileSync(pathToWatFile, { encoding: "UTF-8" });
+  const watBuffer = fs.readFileSync(pathToWatFile, { encoding: "utf-8" });
   const parsed = wabt.parseWat(watFile, watBuffer);
   parsed.resolveNames();
   parsed.validate();

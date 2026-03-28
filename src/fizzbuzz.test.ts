@@ -2,11 +2,11 @@ import { compileAndInstantiate, decodeWasmString } from "./wasm-util";
 
 interface FizzBuzzInstance extends WebAssembly.Instance {
   exports: {
-    fizzbuzz: Function
-  }
+    fizzbuzz: Function;
+  };
 }
 
-it("Prints fizzbuzz", async done => {
+it("Prints fizzbuzz", async () => {
   const lines: Array<string> = [];
   const memory = new WebAssembly.Memory({ initial: 1 });
   const instance = await compileAndInstantiate<FizzBuzzInstance>("fizzbuzz.wat", {
@@ -15,8 +15,8 @@ it("Prints fizzbuzz", async done => {
       println: (offset: number, length: number) => {
         const string = decodeWasmString(memory, offset, length);
         lines.push(string);
-      }
-    }
+      },
+    },
   });
   instance.exports.fizzbuzz(16);
 
@@ -36,6 +36,4 @@ it("Prints fizzbuzz", async done => {
   expect(lines[13]).toEqual("14");
   expect(lines[14]).toEqual("FizzBuzz");
   expect(lines[15]).toEqual("16");
-
-  done();
 });

@@ -12,11 +12,12 @@
   "author": "Rene Hangstrup Møller <rhmoller@gmail.com> (http://giddyplanet.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^26.0.8",
-    "@types/node": "^13.9.1",
-    "jest": "^26.2.2",
-    "prettier": "^1.19.1",
-    "ts-jest": "^26.1.4",
-    "typescript": "^3.8.3"
+    "@swc/core": "^1.11.13",
+    "@swc/jest": "^0.2.37",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "jest": "^30.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "^6.0.2"
   }
 }

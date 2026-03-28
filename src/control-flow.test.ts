@@ -1,11 +1,11 @@
-import {compileAndInstantiate} from "./wasm-util";
+import { compileAndInstantiate } from "./wasm-util";
 
 interface ControlFlowInstance {
   exports: {
     loop: Function;
     countTo: Function;
     if_then_else: Function;
-  }
+  };
 }
 
 describe("control flow", () => {
@@ -15,8 +15,8 @@ describe("control flow", () => {
   beforeAll(async () => {
     instance = await compileAndInstantiate<ControlFlowInstance>("controlflow.wat", {
       imports: {
-        trace: (i: any) => log.push(i)
-      }
+        trace: (i: any) => log.push(i),
+      },
     });
   });
 
@@ -30,13 +30,12 @@ describe("control flow", () => {
     expect(log).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 
-  it("counts from 0 to 5", async done => {
+  it("counts from 0 to 5", async () => {
     instance.exports.countTo(5);
     expect(log).toEqual([0, 1, 2, 3, 4]);
-    done();
   });
 
-  it("demonstrates if-then-else", async done => {
+  it("demonstrates if-then-else", async () => {
     instance.exports.if_then_else(0);
     expect(log).toEqual([3]);
 
@@ -44,7 +43,5 @@ describe("control flow", () => {
 
     instance.exports.if_then_else(1);
     expect(log).toEqual([5]);
-
-    done();
   });
 });
