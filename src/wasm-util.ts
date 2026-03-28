@@ -1,18 +1,31 @@
 import path from "path";
 import fs from "fs";
 import util from "util";
+import { fileURLToPath } from "url";
 import Imports = WebAssembly.Imports;
 
-const wabt = require("./libwabt")();
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+
+// Lazy initialization of wabt module
+let wabt: any = null;
+
+async function getWabt() {
+  if (!wabt) {
+    const wabtModule = await import("./libwabt.js");
+    wabt = await wabtModule.default();
+  }
+  return wabt;
+}
 
 export async function compileAndInstantiate<T extends WebAssembly.Instance>(
   watFile: string,
   imports: Imports = {},
 ): Promise<T> {
-  const pathToWatFile = path.resolve("src", "wat", watFile);
+  const wabt = await getWabt();
+  const pathToWatFile = path.resolve(_dirname, "wat", watFile);
   const watBuffer = fs.readFileSync(pathToWatFile, { encoding: "utf-8" });
   const parsed = wabt.parseWat(watFile, watBuffer);
-  parsed.resolveNames();
   parsed.validate();
   const binaryOutput = parsed.toBinary({ log: true, write_debug_names: true });
   const buffer = binaryOutput.buffer;
@@ -25,7 +38,8 @@ export function decodeWasmString(memory: WebAssembly.Memory, offset: number, len
   return new util.TextDecoder("utf-8").decode(bytes);
 }
 
-export function wat(strings: TemplateStringsArray, ...values: any[]) {
+export async function wat(strings: TemplateStringsArray, ...values: any[]) {
+  const wabt = await getWabt();
   let str = "";
   strings.forEach((string, i) => {
     str += string;
@@ -36,7 +50,6 @@ export function wat(strings: TemplateStringsArray, ...values: any[]) {
   });
 
   const parsed = wabt.parseWat("<src>", str);
-  parsed.resolveNames();
   parsed.validate();
   const binaryOutput = parsed.toBinary({ log: true, write_debug_names: true });
   const buffer = binaryOutput.buffer;

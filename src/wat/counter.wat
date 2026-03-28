@@ -22,7 +22,7 @@
     (i32.store offset=12
       (i32.const 0)
       (i32.add
-        (tee_local $0
+        (local.tee $0
           (i32.load offset=12
             (i32.const 0)
           )
@@ -30,6 +30,6 @@
         (i32.const 1)
       )
     )
-    (get_local $0)
+    (local.get $0)
   )
 )

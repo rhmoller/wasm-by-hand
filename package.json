@@ -2,22 +2,20 @@
   "name": "wasm-by-hand",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "libwabt": "node scripts/getlibwabt.js",
+    "test": "vitest run",
+    "libwabt": "node scripts/getlibwabt.mjs",
     "postinstall": "npm run libwabt"
   },
   "keywords": [],
   "author": "Rene Hangstrup Møller <rhmoller@gmail.com> (http://giddyplanet.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@swc/core": "^1.11.13",
-    "@swc/jest": "^0.2.37",
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
-    "jest": "^30.0.0",
     "prettier": "^3.8.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
   }
 }
